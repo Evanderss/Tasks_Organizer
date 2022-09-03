@@ -10,26 +10,35 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-    <h1>Tasks</h1>
-    <form action="{% url 'create_task' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Write a title">
-        <textarea name="description" rows="3" placeholder="Write a descrption"></textarea>
-        <input type="time" name="time_to_do" placeholder="Write the time to do it">
-        <button>Save</button>
-    </form>
-    {% for task in tasks %}
-    <div>
-        <h3>{{task.title}}</h3>
-        <p>{{task.description}}</p>
-        <p>{{task.time_to_do}}</p>
-        <form action=" {% url 'delete_task' task.id %}" method="POST">
-            {% csrf_token %}
-            <button>Delete</button>
-        </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1>Tasks</h1>
+                <form action="{% url 'create_task' %}" method="POST" class="card card-body bg-black">
+                {% csrf_token %}
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" placeholder="Write a title" class="form-control mb-2">
+                    <label for="description">Description:</label>
+                    <textarea name="description" rows="3" placeholder="Write a descrption" class="form-control mb-2"></textarea>
+                    <label for="time_to_do">Time to do the task:</label>
+                    <input type="time" name="time_to_do" placeholder="Write the time to do it" class="form-control mb-3">
+                    <button class="btn btn-success">Save</button>
+                </form>
+                {% for task in tasks %}
+                <div>
+                    <h3>{{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                    <p>{{task.time_to_do}}</p>
+                    <form action=" {% url 'delete_task' task.id %}" method="POST">
+                    {% csrf_token %}
+                    <button>Delete</button>
+                    </form>
+                </div>
+                {% empty %}
+                <h1>No tasks yet</h1>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% empty %}
-        <h1>No tasks yet</h1>
-    {% endfor %}
 </body>
 </html>
