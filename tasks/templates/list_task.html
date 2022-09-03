@@ -18,5 +18,15 @@
         <input type="time" name="time_to_do" placeholder="Write the time to do it">
         <button>Save</button>
     </form>
+    {% for task in tasks %}
+    <div>
+        <h3>{{task.title}}</h3>
+        <p>{{task.description}}</p>
+        <p>{{task.time_to_do}}</p>
+        <button>Delete</button>
+    </div>
+    {% empty %}
+        <h1>No tasks yet</h1>
+    {% endfor %}
 </body>
 </html>
