@@ -23,7 +23,10 @@
         <h3>{{task.title}}</h3>
         <p>{{task.description}}</p>
         <p>{{task.time_to_do}}</p>
-        <button>Delete</button>
+        <form action=" {% url 'delete_task' task.id %}" method="POST">
+            {% csrf_token %}
+            <button>Delete</button>
+        </form>
     </div>
     {% empty %}
         <h1>No tasks yet</h1>
