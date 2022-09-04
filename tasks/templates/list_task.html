@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <h1>Tasks</h1>
+                <h1 class="display-6 fw-bold bg-black text-center">Tasks</h1>
                 <form action="{% url 'create_task' %}" method="POST" class="card card-body bg-black">
                 {% csrf_token %}
                     <label for="title">Title:</label>
@@ -25,17 +25,17 @@
                     <button class="btn btn-success">Save</button>
                 </form>
                 {% for task in tasks %}
-                <div>
+                <div class="card card-body text-dark mt-3">
                     <h3>{{task.title}}</h3>
                     <p>{{task.description}}</p>
                     <p>{{task.time_to_do}}</p>
                     <form action=" {% url 'delete_task' task.id %}" method="POST">
                     {% csrf_token %}
-                    <button>Delete</button>
+                    <button class="btn btn-danger">Delete</button>
                     </form>
                 </div>
                 {% empty %}
-                <h1>No tasks yet</h1>
+                <h1 class="display-4 text-center">No tasks yet</h1>
                 {% endfor %}
             </div>
         </div>
